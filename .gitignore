@@ -2,3 +2,4 @@ Library/*
 Temp/*
 *.sln
 UnityPackageManager/manifest.json
+*.csproj
