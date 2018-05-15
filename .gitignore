@@ -3,3 +3,6 @@ Temp/*
 *.sln
 UnityPackageManager/manifest.json
 *.csproj
+AKBFramework.Log/*
+obj/*
+*.suo
