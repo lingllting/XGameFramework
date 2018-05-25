@@ -48,7 +48,6 @@ namespace AKBFramework.UI
 			}
 		}
 
-		[RFC(RFCGroup.HidePanel)]
 		public void Hide()
 		{
 			this.gameObject.SetActive(false);

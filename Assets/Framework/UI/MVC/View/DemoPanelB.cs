@@ -11,8 +11,4 @@ public class DemoPanelB : BasePanel
 	public override void OnItemClick (GameObject go, string pathInHierarchy)
 	{
 	}
-
-	protected override void OnRFCHandler (RFCObject fromItem, string type, object parameters)
-	{
-	}
 }

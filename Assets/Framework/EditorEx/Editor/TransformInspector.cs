@@ -57,10 +57,15 @@ public class TransformInspector : Editor
 		if (GUI.changed)
 		{
 			//NGUIEditorTools.RegisterUndo("Transform Change", trans);
+			Undo.RecordObjects(this.targets, "Inspector");
 			trans.localPosition     = Validate(pos);
 			trans.localEulerAngles  = Validate(rot);
 			trans.localScale        = Validate(scale);
+			//EditorUtility.SetDirty(trans);
 		}
+
+//		serializedObject.Update();
+//		serializedObject.ApplyModifiedProperties();
 	}
 
 	/// <summary>
