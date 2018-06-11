@@ -14,6 +14,11 @@ namespace AKBFramework
 			mSpawnPool = innerPool;
 		}
 
+        public Transform Retrieve(GameObject gameObject)
+        {
+            return Retrieve(gameObject.transform);
+        }
+
 		public Transform Retrieve(Transform transform)
 		{
 			return mSpawnPool.Spawn (transform);
@@ -23,6 +28,15 @@ namespace AKBFramework
 		{
 			mSpawnPool.Despawn (transform);
 		}
+
+        public PrefabPool AddPrefabPool(Transform poolItem)
+        {
+            //TODO SpawnPool Settings...
+            PrefabPool prefabPool = new PrefabPool(poolItem);
+            //TODO PrefabPool Settings...
+            mSpawnPool.CreatePrefabPool(prefabPool);
+            return prefabPool;
+        }
 	}
 
 	public class PoolManager : MonoSingleton<PoolManager>
@@ -30,12 +44,17 @@ namespace AKBFramework
 		public Pool CreatePool(Transform prefab)
 		{
 			SpawnPool spawnPool = InnerPoolManager.Pools.Create (prefab.name);
-			//TODO SpawnPool Settings...
-			PrefabPool prefabPool = new PrefabPool(prefab);
-			//TODO PrefabPool Settings...
-			spawnPool.CreatePrefabPool(prefabPool);
 			Pool pool = new Pool (spawnPool);
+
+            PrefabPool prefabPool = pool.AddPrefabPool(prefab);
 			return pool;
 		}
+
+        public Pool CreatePool(string poolName)
+        {
+            SpawnPool spawnPool = InnerPoolManager.Pools.Create(poolName);
+            Pool pool = new Pool(spawnPool);
+            return pool;
+        }
 	}
 }

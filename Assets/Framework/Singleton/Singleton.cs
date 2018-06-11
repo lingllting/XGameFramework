@@ -26,6 +26,12 @@ namespace AKBFramework
 			}
 		}
 
+        public static void Initialize()
+        {
+            mInstance = SingletonCreator.CreateSingleton<T>();
+        }
+        public static bool InInitialized { get { return mInstance != null; } }
+
 		public virtual void Dispose()
 		{
 			mInstance = null;

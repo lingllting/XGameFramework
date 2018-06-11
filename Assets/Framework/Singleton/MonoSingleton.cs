@@ -12,12 +12,19 @@ namespace AKBFramework
 			{
 				if (mInstance == null) 
 				{
-                    mInstance = MonoSingletonCreator.CreateMonoSingleton<T>();
+                    mInstance = MonoSingletonCreator.CreateMonoSingleton<T>(true);
 				}
 
 				return mInstance;
 			}
 		}
+
+        public static void Initialize(bool isDontDestory = true)
+        {
+            mInstance = MonoSingletonCreator.CreateMonoSingleton<T>(isDontDestory);
+        }
+
+        public static bool IsInitialized { get { return mInstance != null; } }
 
 		public virtual void OnSingletonInit()
 		{

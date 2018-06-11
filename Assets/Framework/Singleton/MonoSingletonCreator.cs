@@ -16,7 +16,7 @@ namespace AKBFramework
 			set { mIsUnitTestMode = value; }
 		}
 
-		public static T CreateMonoSingleton<T>() where T : MonoBehaviour, ISingleton
+		public static T CreateMonoSingleton<T>(bool isDontDestroy) where T : MonoBehaviour, ISingleton
 		{
 			T instance = null;
 
@@ -34,14 +34,14 @@ namespace AKBFramework
 					continue;
 				}
 
-				instance = CreateComponentOnGameObject<T>(defineAttri.PathInHierarchy, true);
+                instance = CreateComponentOnGameObject<T>(defineAttri.PathInHierarchy, isDontDestroy);
 				break;
 			}
 
 			if (instance == null)
 			{
-				var obj = new GameObject(typeof(T).Name);
-				if (!mIsUnitTestMode)
+				var obj = new GameObject("(Singleton) " + typeof(T).Name);
+                if (isDontDestroy)
 					Object.DontDestroyOnLoad(obj);
 				instance = obj.AddComponent<T>();
 			}
@@ -56,7 +56,7 @@ namespace AKBFramework
 			var obj = FindGameObject(null, path, true, dontDestroy);
 			if (obj == null)
 			{
-				obj = new GameObject("Singleton of " + typeof(T).Name);
+				obj = new GameObject("(Singleton) " + typeof(T).Name);
 				if (dontDestroy && !mIsUnitTestMode)
 				{
 					Object.DontDestroyOnLoad(obj);

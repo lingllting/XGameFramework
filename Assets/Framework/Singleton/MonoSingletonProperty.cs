@@ -12,7 +12,7 @@ namespace AKBFramework
 			{
 				if (null == mInstance ) 
 				{
-                    mInstance = MonoSingletonCreator.CreateMonoSingleton<T>();
+                    mInstance = MonoSingletonCreator.CreateMonoSingleton<T>(true);
 				}
 
 				return mInstance;
