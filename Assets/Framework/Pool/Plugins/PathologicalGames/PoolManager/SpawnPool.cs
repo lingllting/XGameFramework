@@ -157,8 +157,9 @@ namespace PathologicalGames
 
             if (this.poolName == "")
             {
-                this.poolName = this.group.name.Replace("Pool", "");
-                this.poolName = this.poolName.Replace("(Clone)", "");
+                //this.poolName = this.group.name.Replace("Pool", "");
+                //this.poolName = this.poolName.Replace("(Clone)", "");
+                this.poolName = this.gameObject.name;
             }
 
             if (this.logMessages)
