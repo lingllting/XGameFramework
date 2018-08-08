@@ -546,6 +546,7 @@ namespace AKBFramework
 
 					if (mId == 0)
 					{
+                        mEvent.ID = 0;
 						mEvent.DueTime = 0.0f;
 						return;
 					}
