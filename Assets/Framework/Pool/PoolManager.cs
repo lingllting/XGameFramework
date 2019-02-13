@@ -47,7 +47,11 @@ namespace AKBFramework
 
         public void Release()
         {
-            GameObject.Destroy(mSpawnPool.gameObject);
+            if (mSpawnPool != null)
+            {
+                GameObject.Destroy(mSpawnPool.gameObject);
+                InnerPoolManager.Pools.Remove(mSpawnPool);
+            }
         }
 	}
 

@@ -243,7 +243,7 @@ namespace AKBFramework
 			public void Execute()
 			{
 				//该事件已经被取消
-				if (ID == 0 || DueTime == 0.0f)
+				if (ID == 0/* || DueTime == 0.0f*/)
 				{
 					Recycle();
 					return;
