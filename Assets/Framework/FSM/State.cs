@@ -73,7 +73,7 @@ namespace AKBFramework.StateMachine
 					last = root;
 					root = root.Parent;
 				}
-				mMachine = last.Machine as Machine;
+				mMachine = last as Machine;
 				return mMachine;
 			}
 		}
