@@ -1,24 +1,30 @@
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace AKBFramework
 {
-    using System;
-    using System.Collections.Generic;
-    using UnityEngine;
+#region Event interface
 
-    #region 事件接口
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
+    public class EventPriority : Attribute
+    {
+        public int Priority = 0;
+        public EventPriority(int priority) { Priority = priority; }
+    }
 
     public delegate void OnEvent(params object[] param);
 
-    #endregion
+#endregion
 
     public class EventDispatcher : Singleton<EventDispatcher>
     {
         private readonly Dictionary<int, ListenerWrap> mAllListenerMap = new Dictionary<int, ListenerWrap>(50);
 
         public bool IsRecycled { get; set; }
+        public EventDispatcher() { }
 
-        private EventDispatcher() {}
-
-        #region 内部结构
+#region internal structure of event listener
 
         private class ListenerWrap
         {
@@ -58,6 +64,40 @@ namespace AKBFramework
                 }
 
                 mEventList.Add(listener);
+                mEventList.Sort((a, b) =>
+                {
+                    var aPrioritys = a.Method.GetCustomAttributes(typeof(EventPriority), true);
+                    var bPrioritys = b.Method.GetCustomAttributes(typeof(EventPriority), true);
+                    if ((aPrioritys.Equals(null) || (aPrioritys.Length == 0)) && (bPrioritys.Equals(null) || (bPrioritys.Length == 0)))
+                    {
+                        return 0;
+                    }
+                    else if ((aPrioritys.Equals(null) || (aPrioritys.Length == 0)) && (!bPrioritys.Equals(null) && (bPrioritys.Length > 0)))
+                    {
+                        return -1;
+                    }
+                    else if ((!aPrioritys.Equals(null) && (aPrioritys.Length > 0)) && (bPrioritys.Equals(null) || (bPrioritys.Length == 0)))
+                    {
+                        return 1;
+                    }
+                    else if ((!aPrioritys.Equals(null) && (aPrioritys.Length > 0)) && (!bPrioritys.Equals(null) && (bPrioritys.Length > 0)))
+                    {
+                        var aPriority = aPrioritys[0] as EventPriority;
+                        var bPriority = bPrioritys[0] as EventPriority;
+                        if (aPriority.Priority <= bPriority.Priority)
+                        {
+                            return -1;
+                        }
+                        else
+                        {
+                            return 1;
+                        }
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+                });
                 return true;
             }
 
@@ -82,9 +122,9 @@ namespace AKBFramework
             }
         }
 
-        #endregion
+#endregion
 
-        #region 功能函数
+#region Instance functions
 
         public bool Register<T>(T key, OnEvent fun) where T : IConvertible
         {
@@ -142,11 +182,11 @@ namespace AKBFramework
             mAllListenerMap.Clear();
         }
 
-        #endregion
-        
-        
-        #region 高频率使用的API
-        public static bool SendEvent<T>(T key,params object[] param) where T : IConvertible
+#endregion
+
+
+#region High frequency API
+        public static bool SendEvent<T>(T key, params object[] param) where T : IConvertible
         {
             return Instance.Send(key, param);
         }
@@ -160,6 +200,6 @@ namespace AKBFramework
         {
             Instance.UnRegister(key, fun);
         }
-        #endregion
+#endregion
     }
 }
