@@ -44,7 +44,7 @@ namespace ES3Types
 			writer.WriteProperty("startRotationYMultiplier", instance.startRotationYMultiplier, ES3Type_float.Instance);
 			writer.WriteProperty("startRotationZ", instance.startRotationZ, ES3Type_MinMaxCurve.Instance);
 			writer.WriteProperty("startRotationZMultiplier", instance.startRotationZMultiplier, ES3Type_float.Instance);
-			writer.WriteProperty("randomizeRotationDirection", instance.randomizeRotationDirection, ES3Type_float.Instance);
+			writer.WriteProperty("randomizeRotationDirection", instance.flipRotation, ES3Type_float.Instance);
 			writer.WriteProperty("startColor", instance.startColor, ES3Type_MinMaxGradient.Instance);
 			writer.WriteProperty("gravityModifier", instance.gravityModifier, ES3Type_MinMaxCurve.Instance);
 			writer.WriteProperty("gravityModifierMultiplier", instance.gravityModifierMultiplier, ES3Type_float.Instance);
@@ -153,7 +153,7 @@ namespace ES3Types
 						instance.startRotationZMultiplier = reader.Read<System.Single>(ES3Type_float.Instance);
 						break;
 					case "randomizeRotationDirection":
-						instance.randomizeRotationDirection = reader.Read<System.Single>(ES3Type_float.Instance);
+						instance.flipRotation = reader.Read<System.Single>(ES3Type_float.Instance);
 						break;
 					case "startColor":
 						instance.startColor = reader.Read<UnityEngine.ParticleSystem.MinMaxGradient>(ES3Type_MinMaxGradient.Instance);

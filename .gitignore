@@ -6,3 +6,14 @@ UnityPackageManager/manifest.json
 AKBFramework.Log/*
 obj/*
 *.suo
+*.code-workspace
+Logs/Packages-Update.log
+Packages/manifest.json
+ProjectSettings/*
+.idea/*
+Assets/MyOwn/*
+Assets/MyOwn.meta
+Assets/Framework/framework.code-workspace.meta
+*.meta
+*.meta
+Assembly-CSharp-Editor.csproj.meta

@@ -6,23 +6,23 @@ namespace AKBFramework
 
     #region 事件接口
 
-    public delegate void OnEvent(int key, params object[] param);
+    public delegate void OnEvent(params object[] param);
 
     #endregion
 
-    public class EventSystem : Singleton<EventSystem>
+    public class EventDispatcher : Singleton<EventDispatcher>
     {
         private readonly Dictionary<int, ListenerWrap> mAllListenerMap = new Dictionary<int, ListenerWrap>(50);
 
         public bool IsRecycled { get; set; }
 
-        private EventSystem() {}
+        private EventDispatcher() {}
 
         #region 内部结构
 
         private class ListenerWrap
         {
-            private LinkedList<OnEvent> mEventList;
+            private List<OnEvent> mEventList;
 
             public bool Fire(int key, params object[] param)
             {
@@ -31,19 +31,17 @@ namespace AKBFramework
                     return false;
                 }
 
-                var next = mEventList.First;
-                OnEvent call = null;
-                LinkedListNode<OnEvent> nextCache = null;
-
-                while (next != null)
+                for (int i = 0; i < mEventList.Count; i++)
                 {
-                    call = next.Value;
-                    nextCache = next.Next;
-                    call(key, param);
+                    if (mEventList[i] == null || mEventList[i].Target.Equals(null))
+                    {
+                        mEventList.RemoveAt(i);
+                        i--;
+                        continue;
+                    }
 
-                    next = next.Next ?? nextCache;
+                    mEventList[i](param);
                 }
-
                 return true;
             }
 
@@ -51,7 +49,7 @@ namespace AKBFramework
             {
                 if (mEventList == null)
                 {
-                    mEventList = new LinkedList<OnEvent>();
+                    mEventList = new List<OnEvent>();
                 }
 
                 if (mEventList.Contains(listener))
@@ -59,7 +57,7 @@ namespace AKBFramework
                     return false;
                 }
 
-                mEventList.AddLast(listener);
+                mEventList.Add(listener);
                 return true;
             }
 
