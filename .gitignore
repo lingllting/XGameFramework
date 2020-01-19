@@ -9,7 +9,6 @@ obj/*
 *.code-workspace
 Logs/Packages-Update.log
 Packages/manifest.json
-ProjectSettings/*
 .idea/*
 Assets/MyOwn/*
 Assets/MyOwn.meta
