@@ -6,3 +6,9 @@ UnityPackageManager/manifest.json
 AKBFramework.Log/*
 obj/*
 *.suo
+.idea/
+Logs/
+.idea/
+*.suo
+JetBrains/
+JetBrains.*
