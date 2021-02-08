@@ -11,7 +11,7 @@ public class DemoItemA : BaseItem
 		
 	}
 	
-	public override void OnItemClick (GameObject go, string pathInHierarchy)
+	public override void OnItemClick (GameObject go, object[] param)
 	{
 
 	}

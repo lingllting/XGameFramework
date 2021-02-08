@@ -8,7 +8,7 @@ public class DemoPanelB : BasePanel
 {
 	public Button demo_btn;
 
-	public override void OnItemClick (GameObject go, string pathInHierarchy)
+	public override void OnItemClick (GameObject go, object[] param)
 	{
 	}
 }

@@ -119,14 +119,14 @@ namespace AKBFramework.UI
 	//			pair.Value.OnItemClick(go, path);
 	//		}
 			//自己调用
-			OnItemClick(go, path);
+			OnItemClick(go, new object[]{});
 			//父节点调用
 	//		if (Parent != null)
 	//		{
 	//			Parent.OnItemClick(go, path);
 	//		}
 		}
-		public virtual void OnItemClick(GameObject go, string pathInHierarchy){}
+		public virtual void OnItemClick(GameObject go, object[] param){}
 		public virtual void OnItemHover(GameObject go,bool bState){}
 		public virtual void OnItemPress(GameObject go, bool state) {}
 		public virtual void OnItemDrag(GameObject go, Vector2 delta) {}
@@ -264,7 +264,7 @@ namespace AKBFramework.UI
 				go.AddComponent<UIEventListener>();	
 			}
 
-			UIEventListener.Get(go).OnClick = OnItemClick;
+			UIEventListener.Get(go).onClick = OnItemClick;
 		}
 
 		#if UNITY_EDITOR
