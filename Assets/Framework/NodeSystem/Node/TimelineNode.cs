@@ -3,24 +3,20 @@ namespace AKBFramework
 	using System.Linq;
 	using System.Collections.Generic;
 	using System;
-
-	/// <summary>
-	/// 时间轴执行节点
-	/// </summary>
 	public class TimelineNode : ExecuteNode
 	{
-		private float mCurTime = 0;
+		private float _curTime = 0;
 
 		public Action OnTimelineBeganCallback
 		{
-			get { return OnBeganCallback; }
-			set { OnBeganCallback = value; }
+			get { return onBeganCallback; }
+			set { onBeganCallback = value; }
 		}
 
 		public Action OnTimelineEndedCallback
 		{
-			get { return OnEndedCallback; }
-			set { OnEndedCallback = value; }
+			get { return onEndedCallback; }
+			set { onEndedCallback = value; }
 		}
 
 		public Action<string> OnKeyEventsReceivedCallback = null;
@@ -44,15 +40,15 @@ namespace AKBFramework
 
 		protected override void OnReset()
 		{
-			mCurTime = 0.0f;
+			_curTime = 0.0f;
 			//TODO TimelineQueue.ForEach(pair => pair.Node.Reset());
 		}
 
 		protected override void OnExecute(float dt)
 		{
-			mCurTime += dt;
+			_curTime += dt;
 
-			foreach (var pair in TimelineQueue.Where(pair => pair.Time < mCurTime && !pair.Node.Finished))
+			foreach (var pair in TimelineQueue.Where(pair => pair.Time < _curTime && !pair.Node.Finished))
 			{
 				if (pair.Node.Execute(dt))
 				{

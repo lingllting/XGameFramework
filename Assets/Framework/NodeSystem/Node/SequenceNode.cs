@@ -1,10 +1,7 @@
 namespace AKBFramework
 {
 	using System.Collections.Generic;
-
-	/// <summary>
-	/// 序列执行节点
-	/// </summary>
+	
 	public sealed class SequenceNode : ExecuteNode ,IPoolable
 	{
 		protected readonly List<IExecuteNode> mNodes = new List<IExecuteNode>();
@@ -55,10 +52,7 @@ namespace AKBFramework
 
 			return retNode;
 		}
-
-		/// <summary>
-		/// 不建议使用
-		/// </summary>
+		
 		public SequenceNode(){}
 
 		public SequenceNode Append(IExecuteNode appendedNode)

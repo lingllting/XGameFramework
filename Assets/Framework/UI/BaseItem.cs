@@ -112,7 +112,7 @@ namespace AKBFramework.UI
 		//基类的事件回调，供各个面板复写
 		public void OnItemClick(GameObject go)
 		{
-			string path = go.GetHierarchy();
+			string path = go.name;
 			//所有的子节点调用
 	//		foreach (KeyValuePair<string, BaseItem> pair in _dicBaseItems)
 	//		{
@@ -217,7 +217,7 @@ namespace AKBFramework.UI
 			{
 				if (fieldInfos[i].FieldType.ToString() == "UnityEngine.GameObject")
 				{
-					Transform tr = this.transform.FindChildRecursion(fieldInfos[i].Name);
+					Transform tr = this.transform.FindRecursively(fieldInfos[i].Name);
 					if (tr == null) continue;
 					fieldInfos[i].SetValue(this, tr.gameObject);	
 //					if(tr.gameObject.GetComponent<BoxCollider>() != null)

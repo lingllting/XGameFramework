@@ -63,7 +63,7 @@ namespace AKBFramework
                 }
                 catch (System.Exception ex)
                 {
-                    Debug.LogError("Exception in coroutine: " + ex.Message);
+                    Debug.LogError("Exception in coroutine: " + _routine + "  " + ex.Message);
                     _state = CustomCoroutineState.Finished;
                     break;
                 }

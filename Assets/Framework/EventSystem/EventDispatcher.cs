@@ -66,6 +66,10 @@ namespace AKBFramework
                 mEventList.Add(listener);
                 mEventList.Sort((a, b) =>
                 {
+                    if (a == null || b == null)
+                    {
+                        return 0;
+                    }
                     var aPrioritys = a.Method.GetCustomAttributes(typeof(EventPriority), true);
                     var bPrioritys = b.Method.GetCustomAttributes(typeof(EventPriority), true);
                     if ((aPrioritys.Equals(null) || (aPrioritys.Length == 0)) && (bPrioritys.Equals(null) || (bPrioritys.Length == 0)))

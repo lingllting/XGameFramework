@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using AKBFramework;
 
@@ -8,37 +7,29 @@ public class NodeSystemExample : MonoBehaviour
 	SequenceNode sequenceNode = null;
 	void Start ()
 	{
-//		int count = 0;
-//		Debug.Log ("Sequence Begin~");
-//		this.Sequence ()
-//			.Delay (1.0f)
-//			.Event (() => Debug.Log ("延迟了1秒！"))
-//			.Until (() => {count += 3; Debug.Log(count); return count > 10;})
-//			.Delay(1.0f)
-//			.Event(() => Debug.Log ("延迟了2秒！"))
-//			.Begin()
-//			.DisposeWhenFinished()
-//			.OnDisposed(() => Debug.Log("Dispose!"));
-
-
-		this.StartCoroutineChain (TestA, TestB, () => Debug.Log("Completed."));
-	}
-
-
-	IEnumerator TestA()
-	{
-		yield return new WaitForSeconds (1f);
-		Debug.Log ("A");
-	}
-
-	IEnumerator TestB()
-	{
-		yield return new WaitForSeconds (1f);
-		Debug.Log ("B");
-	}
-
-	void Update ()
-	{
+		int count = 0;
+		Debug.Log ("Sequence Begin~");
 		
+		// Sequence Chain
+		this.Sequence ()
+			.Delay (1.0f)
+			.Event (() => Debug.Log ("Delayed One Second！"))
+			.Until (() => {count += 3; Debug.Log(count); return count > 10;})
+			.Delay(1.0f)
+			.Event(() => Debug.Log ("Delayed Two Seconds！"))
+			.Begin()
+			.DisposeWhenFinished()
+			.OnDisposed(() => Debug.Log("Dispose!"));
+
+		// Repeat Chain
+		this.Repeat(3).Delay(1.0f).Event(() => Debug.LogError("Repeat!")).Begin();
+		
+		// Combination of Sequence Chain and Repeat Chain
+		this.Sequence()
+			.Delay(1.0f, () => Debug.Log("Delay Over."))
+			.Event(() => Debug.Log("Repeat Chain Begin:"))
+			.Repeat(this.Repeat(3).Delay(1.0f).Event(() => Debug.LogError("Repeat!")))
+			.Event(() => Debug.Log("Repeat Chain End.."))
+			.Begin();
 	}
 }

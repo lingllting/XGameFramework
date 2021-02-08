@@ -5,60 +5,70 @@ namespace AKBFramework
 	public abstract class MonoSingleton<T> : MonoBehaviour,ISingleton where T : MonoSingleton<T>
 	{
 		protected static T mInstance = null;
+		// Check to see if it's about to be destroyed.
+		private static bool s_isShuttingDown = false;
+		private static readonly object m_Lock = new object();
 
 		public static T Instance
 		{
-			get 
+			get
 			{
-				if (mInstance == null) 
+				if (s_isShuttingDown)
 				{
-                    mInstance = MonoSingletonCreator.CreateMonoSingleton<T>(true);
+					return null;
 				}
 
+				lock (m_Lock)
+				{
+					if (mInstance == null)
+					{
+						Initialize();
+					}
+				}
 				return mInstance;
 			}
 		}
 
-        public static void Initialize(bool isDontDestory = true)
+        public static void Initialize(bool isDontDestroy = true)
         {
-            mInstance = MonoSingletonCreator.CreateMonoSingleton<T>(isDontDestory);
+	        if (mInstance == null) 
+	        {
+		        var obj = new GameObject("(Singleton) " + typeof(T).Name);
+		        DontDestroyOnLoad(obj);
+		        mInstance = obj.AddComponent<T>();
+		        mInstance.OnSingletonInit();
+	        }
         }
 
-        public static bool IsInitialized { get { return mInstance != null; } }
+        public static bool IsInitialized => mInstance != null;
 
-		public virtual void OnSingletonInit()
+        public virtual void OnSingletonInit()
 		{
-
+			
 		}
 
 		public virtual void Dispose()
 		{
-            if (MonoSingletonCreator.IsUnitTestMode)
-			{
-				Transform curTrans = transform;
-				do
-				{
-					var parent = curTrans.parent;
-					DestroyImmediate(curTrans.gameObject);
-					curTrans = parent;
-				} while (curTrans != null);
-
-				mInstance = null;
-			}
-			else
+			if (gameObject != null)
 			{
 				Destroy(gameObject);
 			}
 		}
 
-		void Awake()
+		protected virtual void Awake()
 		{
 			mInstance = this as T;
+			DontDestroyOnLoad(gameObject);
 		}
 		
 		protected virtual void OnDestroy()
 		{
 			mInstance = null;
+		}
+
+		private void OnApplicationQuit()
+		{
+			s_isShuttingDown = true;
 		}
 	}
 }

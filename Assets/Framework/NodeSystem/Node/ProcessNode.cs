@@ -1,8 +1,5 @@
 namespace AKBFramework
 {
-    /// <summary>
-    /// 启动执行节点
-    /// </summary>
     public class ProcessNode : ExecuteNode
     {
         protected string mTips = "Default";

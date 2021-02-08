@@ -2,25 +2,25 @@ namespace AKBFramework
 {
 	public class KeyEventNode : EventNode
 	{
-		private TimelineNode mTimelineNode;
-		private string mKeyEventName;
+		private TimelineNode _timelineNode;
+		private string _keyEventName;
 
 		public KeyEventNode(string keyEventName, TimelineNode timelineNode)
 		{
-			mTimelineNode = timelineNode;
-			mKeyEventName = keyEventName;
+			_timelineNode = timelineNode;
+			_keyEventName = keyEventName;
 		}
 
 		protected override void OnExecute(float dt)
 		{
-			mTimelineNode.OnKeyEventsReceivedCallback(mKeyEventName);
+			_timelineNode.OnKeyEventsReceivedCallback(_keyEventName);
 			Finished = true;
 		}
 
 		protected override void OnDispose()
 		{
-			mTimelineNode = null;
-			mKeyEventName = null;
+			_timelineNode = null;
+			_keyEventName = null;
 		}
 	}
 }

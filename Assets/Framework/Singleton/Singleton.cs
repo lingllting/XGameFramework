@@ -1,44 +1,59 @@
+using System;
+using System.Reflection;
+
 namespace AKBFramework
-{	
-	public abstract class Singleton<T> : ISingleton where T : Singleton<T>
-	{
-		protected static T mInstance;
-		
-		static object mLock = new object();
+{
+    public abstract class Singleton<T> : ISingleton where T : class, ISingleton
+    {
+        protected static T mInstance;
 
-		protected Singleton()
-		{
-		}
+        static object mLock = new object();
 
-		public static T Instance
-		{
-			get
-			{
-				lock (mLock)
-				{
-					if (mInstance == null)
-					{
-                        mInstance = SingletonCreator.CreateSingleton<T>();
-					}
-				}
+        protected Singleton()
+        {
+        }
 
-				return mInstance;
-			}
-		}
+        public static T Instance
+        {
+            get
+            {
+                lock (mLock)
+                {
+                    if (mInstance == null)
+                    {
+                        Initialize();
+                    }
+                }
+
+                return mInstance;
+            }
+        }
 
         public static void Initialize()
         {
-            mInstance = SingletonCreator.CreateSingleton<T>();
+            if (mInstance == null)
+            {
+                var constructors = typeof(T).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
+                var ctor = Array.Find(constructors, c => c.GetParameters().Length == 0);
+
+                if (ctor == null)
+                {
+                    throw new Exception("Non-Public Constructor() not found! in " + typeof(T));
+                }
+
+                mInstance = ctor.Invoke(null) as T;
+                mInstance?.OnSingletonInit();
+            }
         }
-        public static bool InInitialized { get { return mInstance != null; } }
+        public static bool IsInitialized => mInstance != null;
 
-		public virtual void Dispose()
-		{
-			mInstance = null;
-		}
+        public virtual void Dispose()
+        {
+            mInstance = default;
+        }
 
-		public virtual void OnSingletonInit()
-		{
-		}
-	}
+        public virtual void OnSingletonInit()
+        {
+        }
+    }
 }

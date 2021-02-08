@@ -3,16 +3,13 @@ namespace AKBFramework
 	using System.Linq;
 	using System.Collections.Generic;
 	
-	/// <summary>
-	/// 并发执行的协程
-	/// </summary>
 	public class SpawnNode :ExecuteNode 
 	{
-		protected List<IExecuteNode> mNodeList = new List<IExecuteNode>();
+		private List<IExecuteNode> _nodeList = new List<IExecuteNode>();
 
 		protected override void OnReset()
 		{
-			foreach (var executeNode in mNodeList)
+			foreach (var executeNode in _nodeList)
 			{
 				executeNode.Reset();
 			}
@@ -20,28 +17,28 @@ namespace AKBFramework
 		
 		protected override void OnExecute(float dt)
 		{
-			foreach (var node in mNodeList.Where(node => !node.Finished))
+			foreach (var node in _nodeList.Where(node => !node.Finished))
 			{
 				if (node.Execute(dt))
 				{
-					Finished = mNodeList.All(n => n.Finished);
+					Finished = _nodeList.All(n => n.Finished);
 				}
 			}
 		}
 		
 		public SpawnNode(params IExecuteNode[] nodes)
 		{
-			mNodeList.AddRange (nodes);
+			_nodeList.AddRange (nodes);
 		}
 		
 		protected override void OnDispose()
 		{
-			foreach (var node in mNodeList)
+			foreach (var node in _nodeList)
 			{
 				node.Dispose();
 			}
-			mNodeList.Clear();
-			mNodeList = null;
+			_nodeList.Clear();
+			_nodeList = null;
 		}
 	}
 }

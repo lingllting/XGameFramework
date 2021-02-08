@@ -4,57 +4,57 @@ namespace AKBFramework
     {
         public RepeatNode(IExecuteNode node, int repeatCount)
         {
-            RepeatCount = repeatCount;
-            mNode = node;
+            _repeatCount = repeatCount;
+            _executeNode = node;
         }
         
-        private IExecuteNode mNode;
-        
-        public int RepeatCount = 1;
-        public bool Completed = false;
+        private IExecuteNode _executeNode;
 
-        private int mCurRepeatCount = 0;
+        private int _repeatCount = 1;
+        private bool _completed = false;
+
+        private int _curRepeatCount = 0;
 
         protected override void OnReset()
         {
-            if (null != mNode)
+            if (null != _executeNode)
             {
-                mNode.Reset();
+                _executeNode.Reset();
             }
-            mCurRepeatCount = 0;
-            Completed = false;
+            _curRepeatCount = 0;
+            _completed = false;
         }
         
         protected override void OnExecute(float dt)
         {
-            if (RepeatCount == -1)
+            if (_repeatCount == -1)
             {
-                if (mNode.Execute(dt))
+                if (_executeNode.Execute(dt))
                 {
-                    mNode.Reset();
+                    _executeNode.Reset();
                 }
                 return;
             }
 
-            if (mNode.Execute(dt))
+            if (_executeNode.Execute(dt))
             {
-                mNode.Reset();
-                mCurRepeatCount++;
+                _executeNode.Reset();
+                _curRepeatCount++;
             }
 
-            if (mCurRepeatCount == RepeatCount)
+            if (_curRepeatCount == _repeatCount)
             {
                 Finished = true;
-                Completed = true;
+                _completed = true;
             }
         }
 
         protected override void OnDispose()
         {
-            if (null != mNode)
+            if (null != _executeNode)
             {
-                mNode.Dispose();
-                mNode = null;
+                _executeNode.Dispose();
+                _executeNode = null;
             }
         }
     }

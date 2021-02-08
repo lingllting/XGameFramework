@@ -2,18 +2,15 @@ namespace AKBFramework
 {
 	using System;
 
-	/// <summary>
-	/// 延时执行节点
-	/// </summary>
 	public class DelayNode : ExecuteNode, IPoolable
 	{
-		public float DelayTime;
+		private float DelayTime;
 
 		public static DelayNode Allocate(float delayTime, Action onEndCallback = null)
 		{
 			var retNode = SafeObjectPool<DelayNode>.Instance.Allocate();
 			retNode.DelayTime = delayTime;
-			retNode.OnEndedCallback = onEndCallback;
+			retNode.onEndedCallback = onEndCallback;
 			return retNode;
 		}
 
@@ -26,17 +23,17 @@ namespace AKBFramework
 			DelayTime = delayTime;
 		}
 
-		private float mCurrentSeconds = 0.0f;
+		private float _currentSeconds = 0.0f;
 
 		protected override void OnReset()
 		{
-			mCurrentSeconds = 0.0f;
+			_currentSeconds = 0.0f;
 		}
 
 		protected override void OnExecute(float dt)
 		{
-			mCurrentSeconds += dt;
-			Finished = mCurrentSeconds >= DelayTime;
+			_currentSeconds += dt;
+			Finished = _currentSeconds >= DelayTime;
 		}
 
 		protected override void OnDispose()

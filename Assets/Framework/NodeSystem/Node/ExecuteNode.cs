@@ -4,15 +4,15 @@ namespace AKBFramework
 
     public abstract class ExecuteNode : IExecuteNode
     {
-        public Action OnBeganCallback = null;
-        public Action OnEndedCallback = null;
-        public Action OnDisposedCallback = null;
-        
-        protected bool mOnBeginCalled = false;
+        protected Action onBeganCallback = null;
+        protected Action onEndedCallback = null;
+        private Action _onDisposedCallback = null;
+
+        private bool _onBeginCalled = false;
 
         #region IExecuteNode Support
         public bool Finished { get; protected set; }
-        protected bool mDisposed = false;
+        private bool _disposed = false;
 
         public void Break()
         {
@@ -25,8 +25,8 @@ namespace AKBFramework
         public void Reset()
         {
             Finished = false;
-            mOnBeginCalled = false;
-            mDisposed = false;
+            _onBeginCalled = false;
+            _disposed = false;
             OnReset();
         }
         #endregion
@@ -36,11 +36,11 @@ namespace AKBFramework
 
         public bool Execute(float dt)
         {
-            if (!mOnBeginCalled)
+            if (!_onBeginCalled)
             {
-                mOnBeginCalled = true;
+                _onBeginCalled = true;
                 OnBegin();
-				OnBeganCallback.InvokeGracefully();
+				onBeganCallback?.Invoke();
             }
 
             if (!Finished)
@@ -51,10 +51,10 @@ namespace AKBFramework
             if (Finished)
             {                
                 OnEnd();
-				OnEndedCallback.InvokeGracefully();
+				onEndedCallback?.Invoke();
             }
 
-            return Finished || mDisposed;
+            return Finished || _disposed;
         }
 
         #endregion
@@ -86,13 +86,13 @@ namespace AKBFramework
 
         public void Dispose()
         {
-            if (mDisposed) return;
-            mDisposed = true;
+            if (_disposed) return;
+            _disposed = true;
             
-            OnBeganCallback = null;
-            OnEndedCallback = null;
-			OnDisposedCallback.InvokeGracefully();
-            OnDisposedCallback = null;
+            onBeganCallback = null;
+            onEndedCallback = null;
+			_onDisposedCallback?.Invoke();
+            _onDisposedCallback = null;
             OnDispose();
         }
 

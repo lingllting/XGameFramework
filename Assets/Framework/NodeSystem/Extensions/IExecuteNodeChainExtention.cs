@@ -25,6 +25,11 @@ namespace AKBFramework
             return senfChain.Append(DelayNode.Allocate(seconds));
         }
         
+        public static IExecuteNodeChain Delay(this IExecuteNodeChain senfChain, float seconds, Action action)
+        {
+            return senfChain.Append(DelayNode.Allocate(seconds, action));
+        }
+        
         /// <summary>
         /// Same as Delayw
         /// </summary>
@@ -45,6 +50,11 @@ namespace AKBFramework
         public static IExecuteNodeChain Until(this IExecuteNodeChain selfChain, Func<bool> condition)
         {
             return selfChain.Append(UntilNode.Allocate(condition));
+        }
+        
+        public static IExecuteNodeChain Repeat(this IExecuteNodeChain selfChain, IExecuteNodeChain repeatChain)
+        {
+            return selfChain.Append(repeatChain);
         }
     }
 }
