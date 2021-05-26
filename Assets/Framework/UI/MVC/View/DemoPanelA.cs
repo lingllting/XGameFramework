@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using AKBFramework.UI;
+using XGameFramework.UI;
 using UnityEngine.UI;
 
 public class DemoPanelA : BasePanel

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AKBFramework
+namespace XGameFramework
 {
     public static class GameObjectExtension
     {

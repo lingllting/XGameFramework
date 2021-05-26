@@ -1,4 +1,4 @@
-namespace AKBFramework
+namespace XGameFramework
 {
 	using System.Collections.Generic;
 	

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Diagnostics;
-using AKBFramework.UI;
+using XGameFramework.UI;
 
 public class DemoLogicData : BaseObserved
 {

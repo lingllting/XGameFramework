@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
 
-namespace AKBFramework
+namespace XGameFramework
 {
 	public class UIEventListener : EventTrigger
 	{

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using AKBFramework.UI;
+using XGameFramework.UI;
 
 /// <summary>
 /// 核心数据命令层

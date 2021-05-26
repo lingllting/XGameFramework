@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AKBFramework.StateMachine
+namespace XGameFramework.StateMachine
 {
 	public class Transition
 	{

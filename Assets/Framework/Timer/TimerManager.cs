@@ -6,7 +6,7 @@ using Debug = UnityEngine.Debug;
 using System.Diagnostics;
 #endif
 
-namespace AKBFramework
+namespace XGameFramework
 {
     public class TimerManager : MonoSingleton<TimerManager>
     {

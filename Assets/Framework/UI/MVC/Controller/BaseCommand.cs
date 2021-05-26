@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	public abstract class BaseCommand : ICommand
 	{

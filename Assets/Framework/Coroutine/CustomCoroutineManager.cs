@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AKBFramework
+namespace XGameFramework
 {
     public class CustomCoroutineManager : MonoSingleton<CustomCoroutineManager>
     {

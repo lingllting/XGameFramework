@@ -8,7 +8,7 @@ using strange.extensions.command.api;
 using strange.extensions.mediation.api;
 #endif
 
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	public class BaseUITools 
 	{

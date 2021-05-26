@@ -7,7 +7,7 @@ using System.Collections.Generic;
 /// <summary>
 /// 这个类用于动态创建的prefab，或者动态添加脚本的子物件实现动态绑定
 /// </summary>
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	public class BaseItem : RFCObject 
 	{

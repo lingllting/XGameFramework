@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace AKBFramework
+namespace XGameFramework
 {
     public enum CustomCoroutineState
     {

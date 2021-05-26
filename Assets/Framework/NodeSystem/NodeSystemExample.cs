@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using AKBFramework;
+using XGameFramework;
 
 public class NodeSystemExample : MonoBehaviour 
 {

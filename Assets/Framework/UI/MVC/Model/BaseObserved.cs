@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	/// <summary>
 	/// 被观察者基类

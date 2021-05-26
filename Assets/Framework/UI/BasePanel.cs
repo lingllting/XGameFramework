@@ -4,7 +4,7 @@ using System.Reflection;
 using System;
 using System.Collections.Generic;
 
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	public class BasePanel : BaseItem, IObserver
 	{

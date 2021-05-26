@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEditor;
 
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	public class BaseUIEditorWindow : EditorWindow
 	{

@@ -1,7 +1,7 @@
 using System;
 using System.Reflection;
 
-namespace AKBFramework
+namespace XGameFramework
 {
     public abstract class Singleton<T> : ISingleton where T : class, ISingleton
     {

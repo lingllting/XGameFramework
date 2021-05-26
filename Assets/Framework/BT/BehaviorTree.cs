@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace AKBFramework.BehaviorTree
+namespace XGameFramework.BehaviorTree
 {
 	/// <summary>
 	/// 行为树节点基类

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace AKBFramework
+namespace XGameFramework
 {
     public class UpdateTrigger : MonoBehaviour
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections;
-using AKBFramework.UI;
+using XGameFramework.UI;
 using UnityEngine.UI;
-using AKBFramework;
+using XGameFramework;
 
 public class DemoPanelB : BasePanel
 {

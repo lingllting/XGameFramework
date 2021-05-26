@@ -1,4 +1,4 @@
-namespace AKBFramework
+namespace XGameFramework
 {
     public class RepeatNode : ExecuteNode
     {

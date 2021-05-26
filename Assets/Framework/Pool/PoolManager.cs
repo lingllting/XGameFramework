@@ -4,7 +4,7 @@ using UnityEngine;
 using PathologicalGames;
 using InnerPoolManager = PathologicalGames.PoolManager;
 
-namespace AKBFramework
+namespace XGameFramework
 {
 	public class Pool
 	{

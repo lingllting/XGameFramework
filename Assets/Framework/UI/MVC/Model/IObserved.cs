@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	/// <summary>
 	/// 被观察者接口

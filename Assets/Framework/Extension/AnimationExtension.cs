@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace AKBFramework
+namespace XGameFramework
 {
     public static class AnimationExtension
     {

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-using AKBFramework;
+using XGameFramework;
 using System;
 
-namespace AKBFramework.UI
+namespace XGameFramework.UI
 {
 	/// <summary>
 	/// 中介者接口

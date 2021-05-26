@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Collections.Generic;
 using System;
 
-namespace AKBFramework
+namespace XGameFramework
 {
 	public enum RFCType
 	{

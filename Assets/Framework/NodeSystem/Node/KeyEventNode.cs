@@ -1,4 +1,4 @@
-namespace AKBFramework 
+namespace XGameFramework 
 {
 	public class KeyEventNode : EventNode
 	{
