@@ -1,0 +1,7 @@
+{
+    "name": "com.xgame.framework",
+    "version": "1.0.0",
+    "displayName": "XGameFramework",
+    "description": "This is package of a set of handy tools to facilitate game development.",
+    "unity": "2018.1"
+}

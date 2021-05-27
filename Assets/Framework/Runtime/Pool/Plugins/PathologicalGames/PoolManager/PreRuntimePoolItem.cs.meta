@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 67c7fc9fee0e38847a1f1116db627dd6
+labels:
+- Spawn
+- Manager
+- Preload
+- Pool
+- Instance
+- Performance
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
