@@ -1,6 +1,8 @@
 {
     "name": "Unity.XGameFramework.Editor",
-    "references": [],
+    "references": [
+        "GUID:498aff69d556db84f96efcb1ae7b6140"
+    ],
     "includePlatforms": [
         "Editor"
     ],
